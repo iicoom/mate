@@ -46,68 +46,116 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
-
   @override
   Widget build(BuildContext context) {
-    // This method is rerun every time setState is called, for instance as done
-    // by the _incrementCounter method above.
-    //
-    // The Flutter framework has been optimized to make rerunning build methods
-    // fast, so that you can just rebuild anything that needs updating rather
-    // than having to individually change instances of widgets.
     return Scaffold(
+      backgroundColor: Color.fromRGBO(244, 243, 243, 1),
       appBar: AppBar(
-        // Here we take the value from the MyHomePage object that was created by
-        // the App.build method, and use it to set our appbar title.
-        title: Text(widget.title),
+        backgroundColor: Colors.white,
+        brightness: Brightness.light,
+        elevation: 0,
+        toolbarHeight: 0,
+        // leading: IconButton(
+        //   icon: Icon(Icons.menu, color: Colors.black87,),
+        //   onPressed: () {},
+        // )
       ),
-      body: Center(
-        // Center is a layout widget. It takes a single child and positions it
-        // in the middle of the parent.
+      body: SafeArea(
         child: Column(
-          // Column is also a layout widget. It takes a list of children and
-          // arranges them vertically. By default, it sizes itself to fit its
-          // children horizontally, and tries to be as tall as its parent.
-          //
-          // Invoke "debug painting" (press "p" in the console, choose the
-          // "Toggle Debug Paint" action from the Flutter Inspector in Android
-          // Studio, or the "Toggle Debug Paint" command in Visual Studio Code)
-          // to see the wireframe for each widget.
-          //
-          // Column has various properties to control how it sizes itself and
-          // how it positions its children. Here we use mainAxisAlignment to
-          // center the children vertically; the main axis here is the vertical
-          // axis because Columns are vertical (the cross axis would be
-          // horizontal).
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(15),
+              ),
+              padding: EdgeInsets.all(5),
+              child: Column(
+                children: [
+                  Container(
+                    decoration: BoxDecoration(
+                      color: Color.fromRGBO(244, 243, 243, 1),
+                    ),
+                    padding: EdgeInsets.all(0),
+                    child: TextField(
+                      decoration: InputDecoration(
+                          border: InputBorder.none,
+                          prefixIcon: Icon(Icons.search, color: Colors.black87,),
+                          hintText: "请输入关键词",
+                          hintStyle: TextStyle(color: Colors.grey, fontSize: 15)
+                      ),
+                    ),
+                  )
+                ],
+              )
             ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
+            Container(
+              width: double.infinity,
+              height: 200,
+              decoration: BoxDecoration(
+                color: Color.fromRGBO(253, 230, 240, 1)
+              ),
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  card('assets/images/1.png'),
+                  card('assets/images/1.png'),
+                  card('assets/images/1.png'),
+                  card('assets/images/1.png'),
+                ],
+              ),
             ),
+            SizedBox(
+              height: 20,
+            ),
+            Container(
+              height: 150,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(20),
+                image: DecorationImage(
+                  fit: BoxFit.cover,
+                  image: AssetImage('assets/images/1.png')
+                )
+              ),
+            )
           ],
         ),
       ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      floatingActionButton: IconButton(
+        icon: Icon(Icons.add_circle_outline_sharp, color: Colors.deepOrange,),
+        onPressed: () {},
+        padding: EdgeInsets.all(5),
+      )
     );
   }
+}
+
+Widget card(image) {
+  return AspectRatio(
+    aspectRatio: 2.6 / 2,
+    child: Container(
+      decoration: BoxDecoration(
+        color: Colors.orange,
+        borderRadius: BorderRadius.circular(20),
+        image: DecorationImage(
+          image: AssetImage(image)
+        ),
+      ),
+      margin: EdgeInsets.only(right: 15),
+      child: Container(
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(20),
+          gradient: LinearGradient(
+            begin: Alignment.bottomRight,
+            stops: [0.1, 0.9],
+            colors: [
+              Colors.black.withOpacity(.4),
+              Colors.black.withOpacity(.1),
+            ]
+          )
+        ),
+      )
+    ),
+  );
 }
